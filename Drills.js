@@ -48,17 +48,43 @@ function findPrevious(LL, key) {
     while (curNode.value !== key) {
 
       previousNode = curNode;
+      //console.log(previousNode);
       curNode = curNode.next;
     }
-    console.log(`Previous node before ${key} is ${previousNode.value}`);
+    return previousNode;
+    //console.log(`Previous node before ${key} is ${previousNode.value}`);
   }
 }
 
-
 //returns the last node in the linked list
-function findLast() {
+function findLast(LL) {
+  let curNode = LL.head;
 
+  while (curNode !== null) {
+    if (!curNode.next) {
+      return curNode;
+    }
+    curNode = curNode.next;
+  }
 }
+
+//This code outputs the node at position 1 in the linked list
+
+// function WhatDoesThisProgramDo(lst) {
+//   let current = lst.head;
+//   while (current !== null) {
+//     let newNode = current;
+//     while (newNode.next !== null) {
+//       if (newNode.next.value === current.value) {
+//         newNode.next = newNode.next.next;
+//       }
+//       else {
+//         newNode = newNode.next;
+//       }
+//     }
+//     return current = current.next;
+//   }
+// }
 
 
 function main() {
@@ -81,7 +107,8 @@ function main() {
   //display(SLL);
   //size(SLL);
   //isEmpty(SLL);
-  //findPrevious(SLL, 'testBefore');
+  //console.log(findPrevious(SLL, 'testBefore'));
+  //console.log(findLast(SLL));
 
 }
 
