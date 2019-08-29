@@ -1,5 +1,5 @@
 class _Node {
-  constructor() {
+  constructor(value, next) {
     this.value = value;
     this.next = next;
   }
@@ -18,7 +18,7 @@ class LinkedList {
   // O(n)
   insertLast(item){
     if (this.head === null) {
-      this.insertFirst(item)
+      this.insertFirst(item);
     } 
     else {
       let tempNode = this.head;
@@ -28,6 +28,60 @@ class LinkedList {
       tempNode.next = new _Node(item, null);
     }
   }
+
+  insertBefore(item, key){
+    let curNode = this.head;
+
+    if(!this.head) {
+      return null;
+    }
+
+    while (curNode.next !== null) {
+      if (curNode.next.value === key){
+        let newNode = new _Node(item, null);
+        newNode.next = curNode.next;
+        curNode.next = newNode;
+        return;
+      }
+      curNode = curNode.next;
+    }
+  }
+
+  insertAfter(item, key) {
+    let curNode = this.head;
+
+    while (curNode !== null) {
+      if (curNode.value === key) {
+        curNode.next = new _Node(item, curNode.next);
+        return;
+      } else {
+        curNode = curNode.next;
+      }
+    }
+  }
+
+  getAt(index) {
+    let counter = 0;
+    let node = this.head;
+    while (node) {
+      if (counter === index) {
+        return node;
+      }
+      counter++;
+      node = node.next;
+    }
+    return null;
+  }
+
+  insertAt(item, index) {
+    let prevNode = this.getAt(index - 1);
+    let newNode = new _Node(item);
+    newNode.next = prevNode.next;
+    prevNode.next = newNode;
+    return this.head;
+  }
+
+
 
   // O(n)
   remove(item) {
@@ -63,28 +117,23 @@ class LinkedList {
     let currNode = this.head;
     // If the list is empty
     if (!this.head) {
-        return null;
+      return null;
     }
     // Check for the item 
     while (currNode.value !== item) {
-        /* Return null if it's the end of the list and the item is not on the list */
-           
-        if (currNode.next === null) {
-            return null;
-        }
-        else {
-            // Otherwise, keep looking 
-            currNode = currNode.next;
-        }
+      
+      /* Return null if it's the end of the list and the item is not on the list */
+      if (currNode.next === null) {
+        return null;
+      }
+      else {
+        // Otherwise, keep looking 
+        currNode = currNode.next;
+      }
     }
     return currNode;
   }
 
-  
-//this.head -> node()  "head points to"
+}
 
-// function display(){
-
-// }
-
-// let LL = new LinkedList();
+module.exports = LinkedList;
